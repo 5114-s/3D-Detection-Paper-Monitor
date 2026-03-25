@@ -1,0 +1,61 @@
+_BASE_: "Base.yaml"
+SOLVER:
+  TYPE: "sgd"
+  IMS_PER_BATCH: 4  # 减小batch size（蒸馏需要教师前向，显存更大）
+  BASE_LR: 0.001    # 蒸馏用更小学习率
+  WEIGHT_DECAY: 0.0001
+  STEPS: (8700, 11600)
+  MAX_ITER: 14500   # 减少迭代数（数据集4929张图）
+  WARMUP_ITERS: 453
+  CHECKPOINT_PERIOD: 1000
+TEST:
+  EVAL_PERIOD: 3625
+VIS_PERIOD: 290
+DATASETS:
+  TRAIN: ('SUNRGBD_train', 'SUNRGBD_val')
+  TEST: ('SUNRGBD_test',)
+  CATEGORY_NAMES: ('bicycle', 'books', 'bottle', 'chair', 'cup', 'laptop', 'shoes', 'towel', 'blinds', 'window', 'lamp', 'shelves', 'mirror', 'sink', 'cabinet', 'bathtub', 'door', 'toilet', 'desk', 'box', 'bookcase', 'picture', 'table', 'counter', 'bed', 'night stand', 'pillow', 'sofa', 'television', 'floor mat', 'curtain', 'clothes', 'stationery', 'refrigerator', 'bin', 'stove', 'oven', 'machine')
+  FOLDER_NAME: 'Omni3D'   # 使用 Omni3D 目录（JSON在datasets/Omni3D/，图像在datasets/SUNRGBD/)
+MODEL:
+  META_ARCHITECTURE: RCNN3D_text  # 保留（原版架构名称）
+  ROI_HEADS:
+    NAME : ROIHeads3D_Text
+    NUM_CLASSES: 38
+  STABILIZE: 0.5
+  USE_BN: True
+  WEIGHTS_PRETRAIN: ''
+  WEIGHTS: ''
+  LOSS_W_3D: 1.0
+  ROI_CUBE_HEAD:
+    POOLER_TYPE: "ROIAlignV2"
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 0
+    LOSS_W_3D: 1.0
+    LOSS_W_XY: 1.0
+    LOSS_W_Z: 1.0
+    LOSS_W_DIMS: 1.0
+    LOSS_W_POSE: 1.0
+    LOSS_W_JOINT: 0.0
+    Z_TYPE: "continuous"   # 深度类型：连续值
+    POSE_TYPE: "6d"       # 姿态用6D表示
+    DIMS_PRIORS_ENABLED: False
+    DIMS_PRIORS_FUNC: ""
+    DISENTANGLED_LOSS: True
+    INVERSE_Z_WEIGHT: True
+    VIRTUAL_DEPTH: ""
+    VIRTUAL_FOCAL: ""
+    USE_CONFIDENCE: False
+    INVERSE_Z_WEIGHT: True
+    CHAMFER_POSE: True
+    ALLOCENTRIC_POSE: True
+    CLUSTER_BINS: 1
+    SCALE_ROI_BOXES: False
+INPUT:
+  FORMAT: "RGB"
+  MIN_SIZE_TRAIN: (800,)
+  MAX_SIZE_TRAIN: 1333
+  MIN_SIZE_TEST: 800
+  MAX_SIZE_TEST: 1333
+DATALOADER:
+  NUM_WORKERS: 4
+  REUSE_SHARDED_PROPOSAL: False

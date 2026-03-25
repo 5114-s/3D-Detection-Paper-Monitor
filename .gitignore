@@ -1,0 +1,60 @@
+# 数据集和图片
+datasets/
+data/
+*.jpg
+*.png
+*.json
+
+# 模型权重文件
+weights/
+checkpoints/
+Grounded-SAM-2/checkpoints/
+*.pth
+*.pt
+*.bin
+
+# 缓存与日志
+__pycache__/
+*.log
+
+output/
+third_party/
+test_sam21_results/
+
+# 终极权重黑名单
+*.pth
+*.pt
+*.bin
+*.ckpt
+*.weights
+*.npy
+
+# 过滤掉庞大的第三方库缓存
+Grounded-SAM-2/checkpoints/
+third_party/
+.cache/
+
+datasets/
+external/
+Grounded-SAM-2/
+output/
+pseudo_label/
+weights/
+torch_hub_cache/
+third_party/
+Metric3D/
+*.npy
+*.ply
+
+# 终极巨无霸黑名单
+datasets/
+external/
+Grounded-SAM-2/
+output/
+pseudo_label/
+weights/
+torch_hub_cache/
+third_party/
+Metric3D/
+*.npy
+*.ply

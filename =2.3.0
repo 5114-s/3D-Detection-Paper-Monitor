@@ -1,0 +1,3 @@
+Requirement already satisfied: omegaconf in /home/admin1/miniconda3/envs/ovm3d-1/lib/python3.10/site-packages/omegaconf-2.3.0-py3.10.egg (2.3.0)
+Requirement already satisfied: PyYAML>=5.1.0 in /home/admin1/miniconda3/envs/ovm3d-1/lib/python3.10/site-packages (from omegaconf) (6.0.3)
+Requirement already satisfied: antlr4-python3-runtime==4.9.* in /home/admin1/miniconda3/envs/ovm3d-1/lib/python3.10/site-packages (from omegaconf) (4.9.3)
